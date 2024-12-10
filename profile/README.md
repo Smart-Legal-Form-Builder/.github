@@ -86,159 +86,109 @@ You can download the dataset in ZIP format from the following link:
 
 #### **1. Model and Environment Setup**
 
-In this research, we chose the **GPT-2** model for complaint generation. GPT-2 is a **natural language generation model** that specializes in **text generation** and is highly effective in creating coherent and contextually relevant sentences. By leveraging GPT-2, we aim to automate the process of creating legal documents such as complaints, ensuring the generated text adheres to legal standards.
+The system is built with the following key technologies:
 
-The environment setup for fine-tuning the model involves installing the following essential libraries:
-- Python 3.8+
-- Hugging Face Transformers library
-- PyTorch or TensorFlow (based on preference)
-- Additional utilities: datasets, accelerate, wandb (optional)
+- Flask: A lightweight Python web framework for handling HTTP requests and serving the API.
+- OpenAI GPT-4: A large language model for generating human-like responses to legal queries.
+- LangChain: A framework for integrating LLMs with external data sources, used for constructing the RAG pipeline.
+- FAISS: A library for fast similarity search, used to store and search document embeddings.
+- OpenAIEmbeddings: Converts legal documents into vector representations for similarity search.
 
-```bash
-pip install transformers datasets accelerate wandb
-```
+##### Frontend and Backend Integration:
+- Frontend (Flutter): Provides a responsive UI for Android/iOS, handling user input and generating PDF previews.
+- Backend (AWS EC2 & Flask): Handles user requests, processes data, and generates legal documents via the Flask API.
 
-Once the environment is set up, we load the **GPT-2 model** and the **tokenizer** for text preprocessing.
+##### Environment Setup:
+- Python 3.8+ required
+- LangChain & FAISS for document retrieval and embedding.
+- .env file for securely storing API keys.
 
 #### **2. Dataset Preparation**
-
-For this project, we use a text dataset formatted in plain Text for training the model. The dataset is composed of text entries that represent **legal document sections** such as **complainant details**, **defendant information**, **incident description**, and **complaint intent**. This data is used to train the model to generate legal documents based on the provided templates.
-
-**Dataset Structure**:
-1. **Complainant Information**:
-   - Name, Address, Phone Number, National ID, Occupation
-2. **Defendant Information**:
-   - Name, Address, Phone Number, National ID, Occupation
-3. **Incident Description**:
-   - Incident Date, Location, Incident Details, Outcome
-4. **Complaint Intent**:
-   - Desired legal outcome
-5. **Attached Documents**:
-   - Medical Certificate, Witness Statements
-
-The dataset is divided into four categories based on specific legal issues that are commonly encountered:
-
-Secondhand Transaction Fraud: Legal cases involving fraudulent transactions in secondhand goods, such as selling goods that do not meet the agreed-upon standards or failing to deliver products after receiving payment.
-Online Abuse: Legal cases related to harassment, defamation, or abuse occurring through digital platforms such as social media or online messaging services.
-Sexual Harassment: Cases involving unwanted sexual advances or behaviors, often within the workplace or public spaces.
-Assault and Injury: Legal matters involving physical harm or threats of harm, such as assault, battery, or injury due to negligence or criminal activity.
-Each of these categories is used to generate a specific legal complaint, and the model learns to handle the nuances of different types of legal cases.
-
-Here is an example of how to load a dataset:
-
-```python
-from datasets import load_dataset
-
-# Load the dataset (example for public datasets)
-dataset = load_dataset("path_to_dataset")
-
-# For local text dataset
-from datasets import Dataset
-data = {"text": ["sentence 1", "sentence 2", "..."]}
-dataset = Dataset.from_dict(data)
-```
+The RAG system requires a dataset of legal documents in JSON format, each containing:
+- Text: Case descriptions
+- Metadata: Case category, settlement amount, and sentence length
 
 #### **3. Data Preprocessing and Tokenization**
+- Text Preprocessing: Clean and structure legal texts for seamless processing.
+- Tokenization and Embedding: Legal documents are tokenized and embedded using LangChain and FAISS for efficient retrieval.
 
-Before training the model, we need to tokenize the text data. Tokenization breaks down the sentences into tokens (smaller chunks of text) that the model can understand. The text is preprocessed and tokenized using the GPT-2 tokenizer.
+#### **4. Legal Document Generation Workflow**
+A hybrid approach is used to ensure legal document generation:
+- Dynamic Templates: Pre-designed templates for legal categories (e.g., fraud, harassment).
+- Data Insertion: User-provided data is inserted into the templates.
+- Static Sections: Predefined sections for consistency.
 
-```python
-from transformers import GPT2Tokenizer
+#### **5. RAG System Implementation**
+RAG combines document retrieval and generative AI:
+- Retrieval: Relevant legal documents are retrieved from a prebuilt vector store using FAISS.
+- Augmentation: Retrieved data is provided as context to GPT-4 for generating responses.
 
-tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
+##### Implementation Workflow:
+1. User inputs are processed through the frontend and sent to the backend.
+2. FAISS searches for relevant documents.
+3. Retrieved documents are passed to GPT-4.
+4. GPT-4 generates detailed legal advice or draft documents.
 
-def preprocess_data(examples):
-    inputs = ["Generate complaint: " + text for text in examples["command"]]
-    
-    model_inputs = tokenizer(inputs, truncation=True, padding="max_length", max_length=128, return_tensors="pt")
-    labels = tokenizer(examples["query"], truncation=True, padding="max_length", max_length=128, return_tensors="pt")
-    
-    return {"input_ids": model_inputs["input_ids"], "attention_mask": model_inputs["attention_mask"], "labels": labels["input_ids"]}
-```
+##### System Outputs:
+- Predicted Settlement Amounts: Based on similar cases.
+- Estimated Sentences: Using retrieved data.
+- Legal Insights: Tailored advice from the AI legal advisor.
+- Source References: Documents used for the response.
 
-This preprocessing step ensures that the dataset is in a format suitable for training the model.
+#### **6. Dataset Preparation and Customization**
+Two main datasets were used for training:
+- AI Hub Dataset 71723: Over 60,000 annotated legal cases, ensuring balanced representation across legal categories.
+- AI Hub Dataset 580: 10,000+ legal judgments and contract documents, with labeled clauses for consumer impact.
 
-#### **4. Model Fine-Tuning**
+##### Customization for Target Categories:
+- Datasets were filtered to focus on relevant categories: Fraud in Online Transactions, Sexual Harassment, Online Defamation, and Sexual Assault.
+- A customized dataset of 1,000 cases was created to improve accuracy and resolve data imbalance.
 
-Fine-tuning involves adapting the pre-trained GPT-2 model to our specific task of complaint generation. The model is trained on the dataset that includes complaint templates and various legal document elements. This process adjusts the model’s weights to enable it to generate text that follows legal structures and templates.
-
-We create a blank complaint template to guide the training process, which includes 4 primary sections: complainant details, defendant information, incident description, and complaint intent. The model learns to fill in these sections accurately from the dataset.
-
-The dataset is divided into four categories based on specific legal cases:
-
-1. Secondhand Transaction Fraud
-2. Online Abuse
-3. Sexual Harassment
-4. Assault and Injury
-
-The fine-tuning process involves setting up the training arguments and using the Trainer class to initiate the training.
-
-```python
-from transformers import TrainingArguments, Trainer
-
-training_args = TrainingArguments(
-    output_dir="./results",          # Directory for saving results
-    num_train_epochs=3,              # Number of epochs
-    per_device_train_batch_size=8,   # Batch size
-    learning_rate=5e-5,              # Learning rate
-)
-
-trainer = Trainer(
-    model=model,                     # Model to train
-    args=training_args,              # Training configuration
-    train_dataset=train_dataset,     # Training dataset
-    tokenizer=tokenizer,             # Tokenizer
-)
-
-trainer.train()
-```
-
-Through fine-tuning, the model learns to generate legal text based on complaint templates.
-
-#### **5. Model Evaluation and Validation**
-
-Once the model is trained, it is evaluated using a validation dataset. Evaluation metrics include accuracy, precision, recall, and F1-score to assess how well the model performs in generating legally accurate complaints.
-
-Additionally, to ensure legal accuracy, the generated complaints are reviewed by legal experts to verify that they meet the required legal standards. This validation step ensures that the model not only generates text but also complies with legal requirements.
-
-#### **6. Hyperparameter Optimization**
-
-The training process includes the tuning of hyperparameters to optimize the model’s performance. Hyperparameters such as learning rate, batch size, and number of epochs are adjusted based on experimental results. This optimization helps to achieve better results in generating legally compliant text.
-
-
-By fine-tuning the GPT-2 model with complaint templates, this methodology enables the automatic generation of legally compliant complaints**. The process includes training the model on high-quality datasets, fine-tuning it to adhere to legal document standards, and evaluating its performance through multiple metrics. The system provides a significant advancement in automating the generation of legal documents and can be applied to various legal tasks, making legal services more accessible to individuals and small businesses.
+##### Data Filtering and Storage:
+- Filtering: Relevant cases were selected based on project objectives.
+- Storage: Processed data stored in JSON format and indexed using FAISS for fast retrieval.
 
 
 ---
 
-
 ### IV. Evaluation & Analysis
 
-The Smart Legal Form Builder is currently under training, and performance evaluation and analysis will be conducted after the model is fully trained and validated. However, based on the current development progress, the following evaluation and analysis directions have been set.
+The Smart Legal Form Builder is currently under training, and performance evaluation will take place once the model is fully trained and validated. However, based on current progress, the following evaluation and analysis directions have been established.
 
 #### 1. Evaluation Metrics
-
-The key metrics for evaluating the model's performance are accuracy, precision, recall, and F1-score. These metrics will play a crucial role in evaluating how accurately the model generates text that meets the legal standards for complaint generation.
-
-- Accuracy: Measures how well the generated complaints match the templates and legal requirements.
+Key metrics for evaluating the model’s performance include:
+- Accuracy: Measures how closely the generated complaints match predefined templates and meet legal requirements.
 - Precision: Evaluates how accurately the model generates legally relevant information in the complaint text.
-- Recall: Ensures that all essential elements required for the complaint (e.g., complainant details, incident description) are included in the generated text.
-- F1-score: Provides a balance between precision and recall, giving an overall performance metric.
+- Recall: Ensures that all necessary elements, such as complainant details and incident descriptions, are included in the generated complaint text.
+- F1-score: Balances precision and recall, providing an overall performance metric.
 
+These metrics will guide the assessment of how effectively the model generates legally compliant and relevant complaints.
 
 #### 2. Initial Results and Analysis
-
-Based on the initial model results, the basic details such as complainant and defendant information are generated accurately. However, more complex sections like the incident description and legal outcomes need further refinement. There is a potential for inaccuracies in describing the incident details or legal outcomes, which will require adjustments in future iterations.
-
-Additionally, data imbalance remains a concern, especially for categories like sexual harassment and assault, where there is limited training data. This imbalance may result in lower model accuracy for these specific cases.
+- Initial results show that basic details like complainant and defendant information are being generated accurately.
+- However, more complex sections like incident descriptions and legal outcomes require further refinement.
+- Data imbalance, particularly in categories such as sexual harassment and assault, is observed, which could affect model accuracy for these cases.
 
 #### 3. Improvement Strategy
+To improve the model’s performance, the following strategies will be implemented:
+- Data Augmentation: Increase training data for underrepresented categories to improve generalization.
+- Hyperparameter Tuning: Optimize hyperparameters like learning rate, batch size, and training epochs.
+- Fine-tuning: Specialize the model for different incident types to ensure compliance with legal requirements.
 
-The following improvement strategies will be employed to enhance the model’s performance:
+These strategies are expected to enhance model accuracy and legal compliance over time.
 
-- Data Augmentation: Increase the training data for various incident categories to improve the model’s generalization capabilities.
-- Hyperparameter Tuning: Optimize the model's learning rate, batch size, and epoch count to enhance its performance.
-- Fine-tuning: Further fine-tune the model to specialize in different incident types, ensuring that the legal requirements for each category are met effectively.
+#### 4. Initial Challenges
+Initial implementation faced challenges due to imbalanced datasets, particularly for case categories like online defamation and harassment, affecting retrieval and generation accuracy.
+
+#### 5. Dataset Optimization
+- Customized datasets were created to address data imbalances, with 1,000 tailored legal cases for targeted categories.
+- Improved dataset relevance significantly enhanced RAG system performance, especially for categories like fraud and harassment.
+
+#### 6. RAG System Advantages
+- Reliability: Pre-retrieved legal data ensures factual and trustworthy outputs.
+- Efficiency: Speeds up document drafting, enabling legal complaints to be generated quickly.
+- Scalability: RAG's architecture allows easy expansion into additional case types with minimal overhead.
+
 
 ---
 
