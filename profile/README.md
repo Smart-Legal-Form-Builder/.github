@@ -74,7 +74,10 @@ The initial dataset included a broad range of civil and criminal law data, but l
 #### Download the Dataset
 
 You can download the dataset in ZIP format from the following link:
-[Download Dataset](https://github.com/Smart-Legal-Form-Builder/.github/blob/main/01.%EB%AF%BC%EC%82%AC.zip)
+
+[Download Dataset- 민사](https://github.com/Smart-Legal-Form-Builder/.github/blob/main/01.%EB%AF%BC%EC%82%AC.zip)
+
+[Download Dataset- 형사](https://github.com/Smart-Legal-Form-Builder/.github/blob/main/02.%ED%98%95%EC%82%AC.zip)
 
 ---
 
