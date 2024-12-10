@@ -80,9 +80,9 @@ The initial dataset included a broad range of civil and criminal law data, but l
 ---
 
 
-### III. **Methodology**
+### III. Methodology
 
-#### **1. Model and Environment Setup**
+#### 1. Model and Environment Setup
 
 The system is built with the following key technologies:
 
@@ -101,22 +101,22 @@ The system is built with the following key technologies:
 - LangChain & FAISS for document retrieval and embedding.
 - .env file for securely storing API keys.
 
-#### **2. Dataset Preparation**
+#### 2. Dataset Preparation
 The RAG system requires a dataset of legal documents in JSON format, each containing:
 - Text: Case descriptions
 - Metadata: Case category, settlement amount, and sentence length
 
-#### **3. Data Preprocessing and Tokenization**
+#### 3. Data Preprocessing and Tokenization
 - Text Preprocessing: Clean and structure legal texts for seamless processing.
 - Tokenization and Embedding: Legal documents are tokenized and embedded using LangChain and FAISS for efficient retrieval.
 
-#### **4. Legal Document Generation Workflow**
+#### 4. Legal Document Generation Workflow
 A hybrid approach is used to ensure legal document generation:
 - Dynamic Templates: Pre-designed templates for legal categories (e.g., fraud, harassment).
 - Data Insertion: User-provided data is inserted into the templates.
 - Static Sections: Predefined sections for consistency.
 
-#### **5. RAG System Implementation**
+#### 5. RAG System Implementation
 RAG combines document retrieval and generative AI:
 - Retrieval: Relevant legal documents are retrieved from a prebuilt vector store using FAISS.
 - Augmentation: Retrieved data is provided as context to GPT-4 for generating responses.
@@ -133,7 +133,7 @@ RAG combines document retrieval and generative AI:
 - Legal Insights: Tailored advice from the AI legal advisor.
 - Source References: Documents used for the response.
 
-#### **6. Dataset Preparation and Customization**
+#### 6. Dataset Preparation and Customization
 Two main datasets were used for training:
 - AI Hub Dataset 71723: Over 60,000 annotated legal cases, ensuring balanced representation across legal categories.
 - AI Hub Dataset 580: 10,000+ legal judgments and contract documents, with labeled clauses for consumer impact.
