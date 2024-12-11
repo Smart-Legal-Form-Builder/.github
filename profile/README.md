@@ -6,6 +6,13 @@ Create legal documents and get personalized legal advice effortlessly with LawRe
 ![lawready-001 (1)](https://github.com/user-attachments/assets/a76d3d53-092e-4db0-9685-36526923e3ac)
 
 
+
+## 🎬 Demo video! (click below)
+🔗 https://www.youtube.com/watch?v=zhuRicXTcVs
+
+
+
+
 ## 📢 Group Members
 
 | Name         | Organization                                              | Email                        | Role             |
