@@ -1,5 +1,5 @@
 # Smart Legal Form Builder: AI-Enhanced Document Creation
-> LawReady: Smart Legal From Builder for everyone. 
+> LawReady is smart legal form builder for everyone. 
 Create legal documents and get personalized legal advice effortlessly with LawReady!
 
 
