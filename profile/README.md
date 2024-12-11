@@ -17,7 +17,7 @@ Create legal documents and get personalized legal advice effortlessly with LawRe
 
 | Name         | Organization                                              | Email                        | Role             |
 |--------------|-----------------------------------------------------------|------------------------------|------------------|
-| Seoyeon Kim  | Department of Tourism (관광학부), Hanyang University      | soen0814@hanyang.ac.kr       | AI/ AI backend               |
+| Seoyeon Kim  | Department of Tourism (관광학부), Hanyang University      | soen0814@hanyang.ac.kr       | AI / AI backend               |
 | Jiwon Han    | Department of Business Administration (경영학부), Hanyang University | jiwon8623@hanyang.ac.kr      | Document         |
 | Taeyeon Kim  | Department of Information System (정보시스템학과), Hanyang University | tangboll5075@gmail.com       | Frontend         |
 | Suhyeon Yu   | Department of Information System (정보시스템학과), Hanyang University | sh265826@naver.com           | Frontend/Backend |
