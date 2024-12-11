@@ -1,6 +1,6 @@
 # Smart Legal Form Builder: AI-Enhanced Document Creation
-![AI Screen](profile/screens.png)
 
+![lawready-001 (1)](https://github.com/user-attachments/assets/a76d3d53-092e-4db0-9685-36526923e3ac)
 
 
 ## 📢 Group Members
