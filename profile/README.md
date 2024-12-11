@@ -1,4 +1,6 @@
 # Smart Legal Form Builder: AI-Enhanced Document Creation
+![AI Screen](./profile/인공지능화면.png)
+
 
 
 ## 📢 Group Members
