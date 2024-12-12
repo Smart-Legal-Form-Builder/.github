@@ -45,6 +45,58 @@ This solution not only enables users to create legal documents without professio
 This repository contains the dataset used for training the Retrieval-Augmented Generation (RAG) system, which focuses on legal case analysis. The dataset is structured in JSON format and includes annotated legal case data for categories like Sexual Harassment, Online Defamation, Fraud in Online Transactions, and Sexual Assault.
 
 
+```
+
+{
+        "id": 1,
+        "category": "성추행",
+        "text": "피고인은 지하철 내에서 피해자의 신체를 고의로 접촉하여 추행하였다.",
+        "settlement": 3000000,
+        "sentence": 8,
+        "verdict_summary": "강제추행죄로 징역 8개월, 합의금 300만원 선고.",
+        "keywords": ["대중교통", "강제추행", "성범죄"]
+    }
+
+{
+        "id": 1,
+        "category": "성희롱",
+        "text": "피고인은 회사 회식 자리에서 여직원들에게 '술은 오빠랑 마셔야 제맛이지'라는 등의 성적 발언을 수차례 하였다.",
+        "settlement": 3000000,
+        "sentence": 0,
+        "verdict_summary": "성희롱 혐의로 벌금 300만원 선고. 회사 징계위원회에서 정직 3개월 처분.",
+        "keywords": ["회식", "언어적성희롱", "직장내성희롱"]
+    }
+
+{
+      "id": 1,
+      "category": "온라인 욕설",
+      "text": "피고인은 SNS에서 피해자의 외모를 조롱하며 인신공격성 댓글을 지속적으로 게시했다.",
+      "settlement": 150000,
+      "sentence": 3,
+      "verdict_summary": "SNS에서 피해자의 외모를 조롱하며 명예훼손 및 모욕 혐의로 징역 3개월, 합의금 150000원 선고.",
+      "keywords": [
+        "SNS",
+        "외모 비하",
+        "모욕"
+      ]
+    },
+
+{
+    "id": 1,
+    "category": "중고거래 사기",
+    "text": "피고인은 고급 레시피 책을(를) 거래 후기 사이트를 조작해 피해자를 유인하며 피해자로부터 389000원을 송금받고, 이후 잠적했다.",
+    "settlement": 583039,
+    "sentence": 8,
+    "verdict_summary": "고급 레시피 책 판매 사기 혐의로 징역 8개월, 합의금 583039원 선고.",
+    "keywords": [
+      "고급 레시피 책",
+      "중고거래",
+      "사기"
+    ]
+  },
+
+```
+
 #### Dataset Structure:
 
 The dataset consists of legal case records with the following fields:
