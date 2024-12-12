@@ -117,12 +117,12 @@ The dataset is generated through the following steps:
 
 #### Dataset Overview
 
-##### Legal/Regulatory Text Analysis Data
+Legal/Regulatory Text Analysis Data
 - Source: AI Hub Dataset 71723
 - Description: Includes over 60,000 annotated legal case data with labels for case summaries, Q&A sets, and keywords.
 - Purpose: Supports AI research in legal natural language processing, improving legal case summarization, prediction, and understanding tasks.
 
-##### Legal/Regulatory Judgment and Contract Analysis Data
+Legal/Regulatory Judgment and Contract Analysis Data
 - Source: AI Hub Dataset 580
 - Description: Contains data from over 10,000 legal judgments and contract analyses, with tagging for advantageous/disadvantageous clauses.
 - Purpose: Enhances AI performance in understanding legal text structures and identifying critical elements.
@@ -156,7 +156,7 @@ The system is built with the following key technologies:
 - FAISS: A library for fast similarity search, used to store and search document embeddings.
 - OpenAIEmbeddings: Converts legal documents into vector representations for similarity search.
 
-##### Environment Setup:
+Environment Setup:
 - Python 3.8+ required
 - LangChain & FAISS for document retrieval and embedding.
 - .env file for securely storing API keys.
@@ -181,13 +181,13 @@ RAG combines document retrieval and generative AI:
 - Retrieval: Relevant legal documents are retrieved from a prebuilt vector store using FAISS.
 - Augmentation: Retrieved data is provided as context to GPT-4 for generating responses.
 
-##### Implementation Workflow:
+Implementation Workflow:
 1. User inputs are processed through the frontend and sent to the backend.
 2. FAISS searches for relevant documents.
 3. Retrieved documents are passed to GPT-4.
 4. GPT-4 generates detailed legal advice or draft documents.
 
-##### System Outputs:
+System Outputs:
 - Predicted Settlement Amounts: Based on similar cases.
 - Estimated Sentences: Using retrieved data.
 - Legal Insights: Tailored advice from the AI legal advisor.
@@ -198,11 +198,11 @@ Two main datasets were used for training:
 - AI Hub Dataset 71723: Over 60,000 annotated legal cases, ensuring balanced representation across legal categories.
 - AI Hub Dataset 580: 10,000+ legal judgments and contract documents, with labeled clauses for consumer impact.
 
-##### Customization for Target Categories:
+Customization for Target Categories:
 - Datasets were filtered to focus on relevant categories: Fraud in Online Transactions, Sexual Harassment, Online Defamation, and Sexual Assault.
 - A customized dataset of 1,000 cases was created to improve accuracy and resolve data imbalance.
 
-##### Data Filtering and Storage:
+Data Filtering and Storage:
 - Filtering: Relevant cases were selected based on project objectives.
 - Storage: Processed data stored in JSON format and indexed using FAISS for fast retrieval.
 
@@ -284,11 +284,11 @@ These platforms, like the Smart Legal Form Builder, aim to simplify the legal do
 
 In this research, the Smart Legal Form Builder was developed using the GPT-2 model to automate the generation of legal complaints. The model focuses on filling in the required information such as complainant details, defendant information, incident description, and complaint intent, based on structured templates.
 
-#### Key Findings:
+Key Findings:
 - The model has generated complaints with basic information (e.g., complainant details, defendant details) with high accuracy.
 - However, the incident description and legal outcomes sections still need improvement in terms of accuracy and legal compliance.
 
-#### Future Directions:
+Future Directions:
 To improve the model's performance, we plan to augment the dataset to address data imbalance, especially for categories like sexual harassment and assault. Additionally, fine-tuning the model for different legal cases and optimizing hyperparameters will help improve its overall performance. Legal accuracy will be a key focus of further improvements, with an emphasis on incorporating expert legal reviews.
 
 The Smart Legal Form Builder presents a significant step toward automating legal document generation. By improving its accuracy and generalization, this model has the potential to make legal services more accessible and efficient for individuals, especially in cost-sensitive legal contexts.
