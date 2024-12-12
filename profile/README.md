@@ -252,6 +252,6 @@ The Smart Legal Form Builder presents a significant step toward automating legal
 
 
 ## 📗 Related Documents
-[Smart Legal Form Builder PPT]( 추후 추가예정 )  
+[Smart Legal Form Builder PPT](https://github.com/Smart-Legal-Form-Builder/Document/blob/main/%EC%9D%B8%EA%B3%B5%EC%A7%80%EB%8A%A5%20%EB%B0%8F%20%EC%9D%91%EC%9A%A9%20ppt_%EC%B5%9C%EC%A2%85.pdf)  
 
 [Smart Legal Form Builder Report.pdf]( 추후 추가예정 )
