@@ -45,8 +45,7 @@ This solution not only enables users to create legal documents without professio
 This repository contains the dataset used for training the Retrieval-Augmented Generation (RAG) system, which focuses on legal case analysis. The dataset is structured in JSON format and includes annotated legal case data for categories like Sexual Harassment, Online Defamation, Fraud in Online Transactions, and Sexual Assault.
 
 
-```
-
+```json
 {
         "id": 1,
         "category": "성추행",
@@ -55,8 +54,7 @@ This repository contains the dataset used for training the Retrieval-Augmented G
         "sentence": 8,
         "verdict_summary": "강제추행죄로 징역 8개월, 합의금 300만원 선고.",
         "keywords": ["대중교통", "강제추행", "성범죄"]
-    }
-
+},
 {
         "id": 1,
         "category": "성희롱",
@@ -65,8 +63,7 @@ This repository contains the dataset used for training the Retrieval-Augmented G
         "sentence": 0,
         "verdict_summary": "성희롱 혐의로 벌금 300만원 선고. 회사 징계위원회에서 정직 3개월 처분.",
         "keywords": ["회식", "언어적성희롱", "직장내성희롱"]
-    }
-
+},
 {
       "id": 1,
       "category": "온라인 욕설",
@@ -79,8 +76,7 @@ This repository contains the dataset used for training the Retrieval-Augmented G
         "외모 비하",
         "모욕"
       ]
-    },
-
+},
 {
     "id": 1,
     "category": "중고거래 사기",
@@ -93,8 +89,7 @@ This repository contains the dataset used for training the Retrieval-Augmented G
       "중고거래",
       "사기"
     ]
-  },
-
+}
 ```
 
 #### Dataset Structure:
