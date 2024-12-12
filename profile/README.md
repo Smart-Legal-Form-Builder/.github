@@ -156,10 +156,6 @@ The system is built with the following key technologies:
 - FAISS: A library for fast similarity search, used to store and search document embeddings.
 - OpenAIEmbeddings: Converts legal documents into vector representations for similarity search.
 
-##### Frontend and Backend Integration:
-- Frontend (Flutter): Provides a responsive UI for Android/iOS, handling user input and generating PDF previews.
-- Backend (AWS EC2 & Flask): Handles user requests, processes data, and generates legal documents via the Flask API.
-
 ##### Environment Setup:
 - Python 3.8+ required
 - LangChain & FAISS for document retrieval and embedding.
