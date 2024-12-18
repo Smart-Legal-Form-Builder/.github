@@ -131,6 +131,47 @@ RAG (Retrieval-Augmented Generation) combines large language models with externa
 
 This ensures the user obtains legally grounded documentation derived from the latest and most relevant case law.
 
+Below is the "Failure Report" section translated into English while maintaining the original structure and format. The dataset section and the rest of the content remain unchanged.
+
+---
+
+## Failure Report
+
+During the development of this project, two specific failure cases were encountered. Documenting these failures aims to help prevent similar issues in the future and to explore more effective solutions.
+
+### Failure Case 1: Technical and Model-Related Limitations in GPT-2 Fine-Tuning
+
+Initially, the plan was to fine-tune GPT-2 to directly produce complaint documents in the desired legal format. To achieve this, we attempted to fine-tune KoGPT-2 (a Korean-adapted GPT-2 model distributed by SKT via gluonnlp) based on the following repository: [KoGPT2-FineTuning](https://github.com/gyunggyung/KoGPT2-FineTuning). However, we encountered the following problems:
+
+- **Technical Constraints (Problem 1)**  
+  - Operating environment: GTX-3070Ti, CUDA 12.3  
+  - Using PyTorch compatible with CUDA 12.3 required Python 3.8 or higher  
+  - KoGPT-2 fine-tuning required MXNet (a C++ library), but the compatible NumPy version for MXNet did not align with Python 3.8  
+  This led to complex attempts at resolving library version conflicts, switching GPUs or machines, and other workarounds.
+
+- **Model Characteristics (Problem 2)**  
+  - GPT-2 was originally designed as a context expansion model rather than a dialog-based model. While it can generate long text from short prompts, it is difficult to ensure it produces a strictly formatted document (e.g., a legal complaint template).  
+  Even with successful fine-tuning, achieving the exact formatting requirements was challenging.
+
+Due to these issues, we abandoned the GPT-2 approach and shifted our focus to fine-tuning GPT-3.5.
+
+### Failure Case 2: Training Failures in the GPT-3.5 Fine-Tuning Environment
+
+GPT-3.5 can be tuned on OpenAI’s Playground without additional code, relying solely on hyperparameters and datasets (prompts). The following steps were taken:
+
+- **Dataset Preparation**: Created a dataset suitable for GPT-3.5 (approximately 500 examples, referenced from the AI_for_dataset repository).
+- **Hyperparameter Settings**:  
+  1) Learning Rate: Set to 2, aiming to minimize the loss function effectively.  
+  2) Epochs: Set to 3, as repeatedly training the entire dataset too many times could lead to overfitting.  
+  3) Batch Size: Set to 1 to process the data in the smallest possible increments, ensuring more granular training.
+
+However, after completing the first epoch, OpenAI returned a training execution error. Subsequently, all models under training failed, forcing the abandonment of the project. This outcome was disappointing, and if anyone reading this has insights or suggestions, we encourage them to reach out to a team member via email.
+![image](https://github.com/user-attachments/assets/4c3396f0-9f6a-4438-a4b5-40b954e23814)
+![image](https://github.com/user-attachments/assets/7c88b516-57cd-4bd3-bef0-3c6139a6b47c)
+![image](https://github.com/user-attachments/assets/f2133d90-36f7-448e-a70a-1703bb14bd29)
+
+---
+
 
 ## 📗 Related Documents
 [Smart Legal Form Builder PPT](https://github.com/Smart-Legal-Form-Builder/Document/blob/main/%EC%9D%B8%EA%B3%B5%EC%A7%80%EB%8A%A5%20%EB%B0%8F%20%EC%9D%91%EC%9A%A9%20ppt_%EC%B5%9C%EC%A2%85.pdf)  
