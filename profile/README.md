@@ -131,8 +131,6 @@ RAG (Retrieval-Augmented Generation) combines large language models with externa
 
 This ensures the user obtains legally grounded documentation derived from the latest and most relevant case law.
 
-Below is the "Failure Report" section translated into English while maintaining the original structure and format. The dataset section and the rest of the content remain unchanged.
-
 ---
 
 ## Failure Report
