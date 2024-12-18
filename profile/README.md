@@ -164,6 +164,8 @@ GPT-3.5 can be tuned on OpenAI’s Playground without additional code, relying s
   3) Batch Size: Set to 1 to process the data in the smallest possible increments, ensuring more granular training.
 
 However, after completing the first epoch, OpenAI returned a training execution error. Subsequently, all models under training failed, forcing the abandonment of the project. This outcome was disappointing, and if anyone reading this has insights or suggestions, we encourage them to reach out to a team member via email.
+
+
 ![image](https://github.com/user-attachments/assets/4c3396f0-9f6a-4438-a4b5-40b954e23814)
 ![image](https://github.com/user-attachments/assets/7c88b516-57cd-4bd3-bef0-3c6139a6b47c)
 ![image](https://github.com/user-attachments/assets/f2133d90-36f7-448e-a70a-1703bb14bd29)
